@@ -1,0 +1,16 @@
+{
+    "name": "devdojo/app",
+    "description": "This is the devdojo products app package",
+    "authors": [
+        {
+            "name": "Tony Lea",
+            "email": "tnylea@gmail.com"
+        }
+    ],
+    "autoload": {
+        "psr-4": {
+          "DevDojo\\App\\": "/src"
+        }
+    },
+    "require": {}
+}
