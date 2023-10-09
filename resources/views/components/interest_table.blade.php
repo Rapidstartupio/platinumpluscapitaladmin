@@ -50,18 +50,7 @@
                                 <th scope="col" class="text-center">
                                     Username
                                 </th>
-                                <th scope="col" class="text-center">
-                                    Forex Rate
-                                </th>
-                                <th scope="col" class="text-center">
-                                    Crypto Rate
-                                </th>
-                                <th scope="col" class="text-center">
-                                    Forex Interest
-                                </th>
-                                <th scope="col" class="text-center">
-                                    Crypto Interest
-                                </th>
+
                                 <th scope="col" class="text-center">
                                     Forex Balance
                                 </th>
@@ -69,7 +58,7 @@
                                     Crypto Balance
                                 </th>
                                 <th scope="col" class="text-center">
-                                    Date Crated
+                                    Date Created
                                 </th>
                             </tr>
                         </thead>
@@ -79,18 +68,7 @@
                             <td class=" text-center">
                                 {{$transaction->user->username}}
                             </td>
-                            <td class="px-6 py-5">
-                                {{$transaction->forex_rate}}%
-                            </td>
-                            <td class="px-6 py-5">
-                                {{$transaction->crypto_rate}}%
-                            </td>
-                            <td class="px-6 py-5">
-                                ${{$transaction->forex_interest}}
-                            </td>
-                            <td class="px-6 py-5">
-                                ${{$transaction->crypto_interest}}
-                            </td>
+
                             <td class="px-6 py-5">
                                 ${{$transaction->forex_amount}}
                             </td>

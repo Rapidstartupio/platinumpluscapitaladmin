@@ -25,14 +25,13 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Response; // Import the Response class
 
-
+/*
 Route::get('cron', function(){
   $last_day = Carbon::now()->endOfMonth()->format('d');
   $today = Carbon::now()->format('d');
   $month = lcfirst(Carbon::now()->format('F'));
   $year = Carbon::now()->format('Y');
-  $rate = MonthlyInterest::where('month',$month)->where('year',$year)->first();
-  if($rate){
+
       $users = User::with('balance')->whereHas('balance')->latest()->get();
       foreach($users as $user){
           $balance = $user->balance()->first();
@@ -43,15 +42,11 @@ Route::get('cron', function(){
                   $interest->user_id = $user->id;
                   $interest->forex_amount = $balance->balance_in_forex;
                   $interest->crypto_amount = $balance->balance_in_crypto;
-                  $interest->forex_rate = $rate->interest_type_forex;
-                  $interest->crypto_rate = $rate->interest_type_crypto;
-                  $interest->forex_interest = $balance->balance_in_forex * (($rate->interest_type_forex/100)/30);
-                  $interest->crypto_interest = $balance->balance_in_crypto * (($rate->interest_type_crypto/100)/30);
                   $interest->save();
               }
           }
       }
-  }
+
   if($today == $last_day){
       foreach($users as $user){
           $balance = $user->balance()->first();
@@ -71,6 +66,64 @@ Route::get('cron', function(){
   return "200 ok";
 
 });
+*/
+
+
+Route::get('cron', function(){
+  $last_day = Carbon::now()->endOfMonth()->format('d');
+  $today = Carbon::now()->format('d');
+  $month = lcfirst(Carbon::now()->format('F'));
+  $year = Carbon::now()->format('Y');
+  $rate = MonthlyInterest::where('month', $month)->where('year', $year)->first();
+
+  $users = User::with('balance')->whereHas('balance')->latest()->get();
+
+  foreach($users as $user){
+      $balance = $user->balance()->first();
+      if($balance){
+          $check = InterestLog::whereUserId($user->id)->whereDay('created_at', now()->day)->first();
+          if(!$check){
+              $interest = new InterestLog;
+              $interest->user_id = $user->id;
+              $interest->forex_amount = $balance->balance_in_forex;
+              $interest->crypto_amount = $balance->balance_in_crypto;
+              $interest->save();
+          }
+      }
+  }
+
+  if($today == $last_day && $rate ){
+      foreach($users as $user){
+          $balance = $user->balance()->first();
+          if($balance){
+              // Get all records for the user for the current month
+              $interestLogs = InterestLog::whereUserId($user->id)->whereMonth('created_at', now()->month)->get();
+
+              $forex_total_interest = 0;
+              $crypto_total_interest = 0;
+
+              foreach($interestLogs as $log){
+                  $forex_total_interest += ($log->forex_amount * $rate->interest_type_forex / 100) / 30;
+                  $crypto_total_interest += ($log->crypto_amount * $rate->interest_type_crypto / 100) / 30;
+              }
+
+              // Update user's balance
+              $balance->balance_in_forex += $forex_total_interest;
+              $balance->balance_in_crypto += $crypto_total_interest;
+              $balance->save();
+
+              // Update InterestLog entries to indicate that they have been processed
+              foreach($interestLogs as $interest){
+                  $interest->status = 1;
+                  $interest->save();
+              }
+          }
+      }
+  }
+
+  return "200 ok";
+});
+
 
 // Authentication routes
 Auth::routes();
