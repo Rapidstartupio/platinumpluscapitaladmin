@@ -25,48 +25,6 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Response; // Import the Response class
 
-/*
-Route::get('cron', function(){
-  $last_day = Carbon::now()->endOfMonth()->format('d');
-  $today = Carbon::now()->format('d');
-  $month = lcfirst(Carbon::now()->format('F'));
-  $year = Carbon::now()->format('Y');
-
-      $users = User::with('balance')->whereHas('balance')->latest()->get();
-      foreach($users as $user){
-          $balance = $user->balance()->first();
-          if($balance){
-              $check = InterestLog::whereUserId($user->id)->whereDay('created_at', now()->day)->first();
-              if(!$check){
-                  $interest = new InterestLog;
-                  $interest->user_id = $user->id;
-                  $interest->forex_amount = $balance->balance_in_forex;
-                  $interest->crypto_amount = $balance->balance_in_crypto;
-                  $interest->save();
-              }
-          }
-      }
-
-  if($today == $last_day){
-      foreach($users as $user){
-          $balance = $user->balance()->first();
-          if($balance){
-              $interests = InterestLog::whereUserId($user->id)->whereStatus(0)->get();
-              $balance->balance_in_forex = $balance->balance_in_forex + $interests->sum('forex_interest');
-              $balance->balance_in_crypto = $balance->balance_in_crypto + $interests->sum('crypto_interest');
-              $balance->save();
-              foreach($interests as $interest){
-                  $interest->status = 1;
-                  $interest->save();
-              }
-          }
-      }
-  }
-  //return a response 200 ok , cron runned successfully
-  return "200 ok";
-
-});
-*/
 
 
 Route::get('cron', function(){
@@ -123,6 +81,9 @@ Route::get('cron', function(){
 
   return "200 ok";
 });
+
+
+
 
 
 // Authentication routes
