@@ -76,7 +76,7 @@
                                 ${{$transaction->crypto_amount}}
                             </td>
                             <td class="px-6 py-5">
-                                {{$transaction->created_at->format('d/m/Y H:i:s')}}
+                                {{$transaction->created_at}}
                             </td>
                         </tr>
                         @endforeach
