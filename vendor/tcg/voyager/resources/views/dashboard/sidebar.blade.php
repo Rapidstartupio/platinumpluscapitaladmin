@@ -34,7 +34,7 @@
             <li class="{{ \Request::route()->getName() == 'admin.interest.transactions' ? 'active' : '' }}">
                 <a href="{{ url('admin/interest/transactions') }}" class="{{ \Request::route()->getName() == 'admin.interest.transactions' ? 'active' : '' }}">
                     <span class="icon voyager-dollar"></span>
-                    <span class="title">Interest Transactions</span>
+                    <span class="title">Daily Balances</span>
                 </a>
             </li>
         </ul>
