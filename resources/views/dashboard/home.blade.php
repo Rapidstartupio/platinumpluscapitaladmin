@@ -577,128 +577,129 @@ svg.results__dial {
 
                 <hr class="seperator">
 
+
                 <div class="balance-dials">
-                    <span class="text text-lg font-medium leading-6 text-gray-600">BALANCE STATUS</span>
-                    <p class="text block text-sm font-medium leading-5 text-gray-700 mt-2"><b>Here is the status of your balance by type.</b></p>
+    <span class="text text-lg font-medium leading-6 text-gray-600">BALANCE STATUS</span>
+    <p class="text block text-sm font-medium leading-5 text-gray-700 mt-2"><b>Here is the status of your balance by type.</b></p>
 
-                    <div class="container mt-10 flex-col sm:gap-6 md:gap-0">
+    <div class="container mt-10 flex gap-6">
+        <!-- First SVG here -->
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 520" class="results__dial">
 
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 520" class="results__dial">
+<title>Your Crypto Balance</title>
 
-                            <title>Your Crypto Balance</title>
+<g class="results__dial-circles">
+    <path class="results__dial-outer" d="M260,64c110.46,0,200,89.54,200,200S370.46,464,260,464,60,374.46,60,264,149.54,64,260,64" fill="none" stroke="#64d3de" stroke-miterlimit="10" opacity="0.6"/>
+    <path class="results__dial-track" d="M260,86A178,178,0,1,1,82,264,178,178,0,0,1,260,86" fill="none" stroke="#50afb8" stroke-miterlimit="10" stroke-width="8"/>
+    <path class="results__dial-track-perc" d="M260,86A178,178,0,1,1,82,264,178,178,0,0,1,260,86" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="8"/>
+</g>
+<g class="results__dial-markers" fill="#64d3de">
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+</g>
+<g class="results__dial-percent-text" fill="#64d3de" font-size="18" >
+    <text x="255" y="43.99">0%</text>
+    <text x="388" y="86.99">10%</text>
+    <text x="471" y="199.99">20%</text>
+    <text x="470" y="340.99">30%</text>
+    <text x="381" y="454.99">40%</text>
+    <text x="250" y="495.99">50%</text>
+    <text x="118" y="454.99">60%</text>
+    <text x="26" y="340.99">70%</text>
+    <text x="20" y="200.99">80%</text>
+    <text x="105" y="85.99">90%</text>
+</g>
+<g class="">
+    <!-- <text class="results__dial-perc-text results__text" x="272" y="203.98" fill="#fff">
+        <tspan class="results__dial-perc" text-anchor="start">0</tspan>
+        <tspan baseline-shift="super">%</tspan>
+    </text> -->
+    <text class="results__dial-effect results__text text-center" x="200" y="350" font-size="28" fill="#64d3de">CRYPTO</text>
+    <text class="results__dial-results results__text" text-anchor="middle" x="250" y="285" fill="#64d3de">
+        <tspan baseline-shift="super">$</tspan>
+        <tspan fill="#fff" class="results__dial-saving">{{ $user_crypto_balance ? $user_crypto_balance : 0 }}</tspan>
+    </text>
+</g>
+<!-- <g class="results__dial-drag" fill="#fff">
+    <g class="results__dial-drag-inner">
+        <circle class="results__dial-drag-hit" cx="260" cy="35" r="30" fill="white" opacity="0" />
+        <circle class="results__dial-drag-pad" cx="260" cy="35" r="20" />
+        <g class="results__dial-drag-arrows" fill="#092a30">
+            <polygon points="266.73 38.66 266 37.96 268.55 35.48 266 33.01 266.73 32.3 270 35.48 266.73 38.66" />
+            <polygon points="253.27 38.66 254 37.96 251.45 35.48 254 33.01 253.27 32.3 250 35.48 253.27 38.66" />
+            <rect x="251" y="35" width="18" height="1"  />
+        </g>
+    </g>
+    <rect class="results__dial-drag-line" x="260" y="55" width="1" height="35" />
+</g> -->
+</svg>
 
-                            <g class="results__dial-circles">
-                                <path class="results__dial-outer" d="M260,64c110.46,0,200,89.54,200,200S370.46,464,260,464,60,374.46,60,264,149.54,64,260,64" fill="none" stroke="#64d3de" stroke-miterlimit="10" opacity="0.6"/>
-                                <path class="results__dial-track" d="M260,86A178,178,0,1,1,82,264,178,178,0,0,1,260,86" fill="none" stroke="#50afb8" stroke-miterlimit="10" stroke-width="8"/>
-                                <path class="results__dial-track-perc" d="M260,86A178,178,0,1,1,82,264,178,178,0,0,1,260,86" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="8"/>
-                            </g>
-                            <g class="results__dial-markers" fill="#64d3de">
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                            </g>
-                            <g class="results__dial-percent-text" fill="#64d3de" font-size="18" >
-                                <text x="255" y="43.99">0%</text>
-                                <text x="388" y="86.99">10%</text>
-                                <text x="471" y="199.99">20%</text>
-                                <text x="470" y="340.99">30%</text>
-                                <text x="381" y="454.99">40%</text>
-                                <text x="250" y="495.99">50%</text>
-                                <text x="118" y="454.99">60%</text>
-                                <text x="26" y="340.99">70%</text>
-                                <text x="20" y="200.99">80%</text>
-                                <text x="105" y="85.99">90%</text>
-                            </g>
-                            <g class="">
-                                <!-- <text class="results__dial-perc-text results__text" x="272" y="203.98" fill="#fff">
-                                    <tspan class="results__dial-perc" text-anchor="start">0</tspan>
-                                    <tspan baseline-shift="super">%</tspan>
-                                </text> -->
-                                <text class="results__dial-effect results__text text-center" x="200" y="350" font-size="28" fill="#64d3de">CRYPTO</text>
-                                <text class="results__dial-results results__text" text-anchor="middle" x="250" y="285" fill="#64d3de">
-                                    <tspan baseline-shift="super">$</tspan>
-                                    <tspan fill="#fff" class="results__dial-saving">{{ $user_crypto_balance ? $user_crypto_balance : 0 }}</tspan>
-                                </text>
-                            </g>
-                            <!-- <g class="results__dial-drag" fill="#fff">
-                                <g class="results__dial-drag-inner">
-                                    <circle class="results__dial-drag-hit" cx="260" cy="35" r="30" fill="white" opacity="0" />
-                                    <circle class="results__dial-drag-pad" cx="260" cy="35" r="20" />
-                                    <g class="results__dial-drag-arrows" fill="#092a30">
-                                        <polygon points="266.73 38.66 266 37.96 268.55 35.48 266 33.01 266.73 32.3 270 35.48 266.73 38.66" />
-                                        <polygon points="253.27 38.66 254 37.96 251.45 35.48 254 33.01 253.27 32.3 250 35.48 253.27 38.66" />
-                                        <rect x="251" y="35" width="18" height="1"  />
-                                    </g>
-                                </g>
-                                <rect class="results__dial-drag-line" x="260" y="55" width="1" height="35" />
-                            </g> -->
-                        </svg>
-
-                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 520" class="results__dial">
-                            <title>Your Forex Balance</title>
-                            <g class="results__dial-circles">
-                                <path class="results__dial-outer" d="M260,64c110.46,0,200,89.54,200,200S370.46,464,260,464,60,374.46,60,264,149.54,64,260,64" fill="none" stroke="#64d3de" stroke-miterlimit="10" opacity="0.6"/>
-                                <path class="results__dial-track" d="M260,86A178,178,0,1,1,82,264,178,178,0,0,1,260,86" fill="none" stroke="#50afb8" stroke-miterlimit="10" stroke-width="8"/>
-                                <path class="results__dial-track-perc" d="M260,86A178,178,0,1,1,82,264,178,178,0,0,1,260,86" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="8"/>
-                            </g>
-                            <g class="results__dial-markers" fill="#64d3de">
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                                <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
-                            </g>
-                            <g class="results__dial-percent-text" fill="#64d3de" font-size="18" >
-                                <text x="255" y="43.99">0%</text>
-                                <text x="388" y="86.99">10%</text>
-                                <text x="471" y="199.99">20%</text>
-                                <text x="470" y="340.99">30%</text>
-                                <text x="381" y="454.99">40%</text>
-                                <text x="250" y="495.99">50%</text>
-                                <text x="118" y="454.99">60%</text>
-                                <text x="26" y="340.99">70%</text>
-                                <text x="20" y="200.99">80%</text>
-                                <text x="105" y="85.99">90%</text>
-                            </g>
-                            <g class="">
-                                <!-- <text class="results__dial-perc-text results__text" x="272" y="203.98" fill="#fff">
-                                    <tspan class="results__dial-perc" text-anchor="start">0</tspan>
-                                    <tspan baseline-shift="super">%</tspan>
-                                </text> -->
-                                <text class="results__dial-effect results__text text-center" x="175" y="350" font-size="28" fill="#64d3de">FIAT(FOREX)</text>
-                                <text class="results__dial-results results__text" text-anchor="middle" x="250" y="285" fill="#64d3de">
-                                    <tspan baseline-shift="super">$</tspan>
-                                    <tspan fill="#fff" class="results__dial-saving">{{ $user_forex_balance ? $user_forex_balance : 0 }}</tspan>
-                                </text>
-                            </g>
-                            <!-- <g class="results__dial-drag" fill="#fff">
-                                <g class="results__dial-drag-inner">
-                                    <circle class="results__dial-drag-hit" cx="260" cy="35" r="30" fill="white" opacity="0" />
-                                    <circle class="results__dial-drag-pad" cx="260" cy="35" r="20" />
-                                    <g class="results__dial-drag-arrows" fill="#092a30">
-                                        <polygon points="266.73 38.66 266 37.96 268.55 35.48 266 33.01 266.73 32.3 270 35.48 266.73 38.66" />
-                                        <polygon points="253.27 38.66 254 37.96 251.45 35.48 254 33.01 253.27 32.3 250 35.48 253.27 38.66" />
-                                        <rect x="251" y="35" width="18" height="1"  />
-                                    </g>
-                                </g>
-                                <rect class="results__dial-drag-line" x="260" y="55" width="1" height="35" />
-                            </g> -->
-                        </svg>
-
-                    </div>
-                </div>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 920 520" class="results__dial">
+<title>Your Forex Balance</title>
+<g class="results__dial-circles">
+    <path class="results__dial-outer" d="M260,64c110.46,0,200,89.54,200,200S370.46,464,260,464,60,374.46,60,264,149.54,64,260,64" fill="none" stroke="#64d3de" stroke-miterlimit="10" opacity="0.6"/>
+    <path class="results__dial-track" d="M260,86A178,178,0,1,1,82,264,178,178,0,0,1,260,86" fill="none" stroke="#50afb8" stroke-miterlimit="10" stroke-width="8"/>
+    <path class="results__dial-track-perc" d="M260,86A178,178,0,1,1,82,264,178,178,0,0,1,260,86" fill="none" stroke="#fff" stroke-miterlimit="10" stroke-width="8"/>
+</g>
+<g class="results__dial-markers" fill="#64d3de">
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+    <rect class="results__dial-marker" x="260" y="55" width="1" height="9" />
+</g>
+<g class="results__dial-percent-text" fill="#64d3de" font-size="18" >
+    <text x="255" y="43.99">0%</text>
+    <text x="388" y="86.99">10%</text>
+    <text x="471" y="199.99">20%</text>
+    <text x="470" y="340.99">30%</text>
+    <text x="381" y="454.99">40%</text>
+    <text x="250" y="495.99">50%</text>
+    <text x="118" y="454.99">60%</text>
+    <text x="26" y="340.99">70%</text>
+    <text x="20" y="200.99">80%</text>
+    <text x="105" y="85.99">90%</text>
+</g>
+<g class="">
+    <!-- <text class="results__dial-perc-text results__text" x="272" y="203.98" fill="#fff">
+        <tspan class="results__dial-perc" text-anchor="start">0</tspan>
+        <tspan baseline-shift="super">%</tspan>
+    </text> -->
+    <text class="results__dial-effect results__text text-center" x="175" y="350" font-size="28" fill="#64d3de">FIAT(FOREX)</text>
+    <text class="results__dial-results results__text" text-anchor="middle" x="250" y="285" fill="#64d3de">
+        <tspan baseline-shift="super">$</tspan>
+        <tspan fill="#fff" class="results__dial-saving">{{ $user_forex_balance ? $user_forex_balance : 0 }}</tspan>
+    </text>
+</g>
+<!-- <g class="results__dial-drag" fill="#fff">
+    <g class="results__dial-drag-inner">
+        <circle class="results__dial-drag-hit" cx="260" cy="35" r="30" fill="white" opacity="0" />
+        <circle class="results__dial-drag-pad" cx="260" cy="35" r="20" />
+        <g class="results__dial-drag-arrows" fill="#092a30">
+            <polygon points="266.73 38.66 266 37.96 268.55 35.48 266 33.01 266.73 32.3 270 35.48 266.73 38.66" />
+            <polygon points="253.27 38.66 254 37.96 251.45 35.48 254 33.01 253.27 32.3 250 35.48 253.27 38.66" />
+            <rect x="251" y="35" width="18" height="1"  />
+        </g>
+    </g>
+    <rect class="results__dial-drag-line" x="260" y="55" width="1" height="35" />
+</g> -->
+</svg>
+        <!-- Second SVG here -->
+    </div>
+</div>
 
             </div>
         </div>
@@ -908,6 +909,3 @@ console.clear();
 
     </script>
 @endsection
-
-
-
