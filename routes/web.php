@@ -33,8 +33,10 @@ use App\Models\Transaction;
 
 use App\Models\Balance;
 
-function getRandomNumber() {
-  return mt_rand(1000000000, 99999999999);
+if (!function_exists('getRandomNumber')) {
+  function getRandomNumber() {
+      return mt_rand(1000000000, 99999999999);
+  }
 }
 
 
