@@ -29,9 +29,6 @@ use Illuminate\Http\Response; // Import the Response class
 
 use App\Models\Transaction;
 
-function randomNumber() {
-  return mt_rand(1000000000, 99999999999);
-}
 
 /*
 Route::get('cron', function(){
@@ -122,6 +119,11 @@ Route::get('cron', function(){
 
 
 use App\Models\Balance;
+
+function randomNumber() {
+  return mt_rand(1000000000, 99999999999);
+}
+
 
 Route::get('cron', function(){
     $startDate = Carbon::create(2023, 9, 1);
