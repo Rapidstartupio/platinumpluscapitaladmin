@@ -26,7 +26,7 @@ use Carbon\Carbon;
 use Illuminate\Http\Response; // Import the Response class
 
 
-
+use Illuminate\Support\Facades\Log;
 use App\Models\Transaction;
 
 use App\Models\Balance;
@@ -52,7 +52,15 @@ Route::get('cron', function(){
     foreach($users as $user) {
         $balance = $user->balance()->first();
         if($balance) {
-            $check = InterestLog::whereUserId($user->id)->whereDay('created_at', now()->day)->first();
+           // update this to check day and month and year ..
+            $check = InterestLog::whereUserId($user->id)->whereDay('created_at', now()->day)->whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->first();
+
+
+
+            Log::info($check);
+            Log::info(  now()->day);
+
+
             if(!$check) {
                 $interest = new InterestLog;
                 $interest->user_id = $user->id;
