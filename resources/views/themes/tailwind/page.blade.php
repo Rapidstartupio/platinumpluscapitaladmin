@@ -11,7 +11,7 @@
             <meta property="dateModified" content="{{ Carbon\Carbon::parse($page->updated_at)->toIso8601String() }}">
             <meta class="uk-margin-remove-adjacent" property="datePublished" content="{{ Carbon\Carbon::parse($page->created_at)->toIso8601String() }}">
 
-            <h1>{{ $page->title }}</h1>
+            <h1 style="color:white!important;">{{ $page->title }}</h1>
 
             @if(!is_null($page->image))
                 <img width="1200" height="640" src="{{ $page->image() }}" alt="{{ $page->title }}" srcset="{{ $page->image() }}">
