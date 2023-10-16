@@ -17,6 +17,82 @@
 </head>
 
 <body class="font-inter antialiased bg-slate-900 text-slate-100 tracking-tight">
+    <!-- TEMP FORM POPUP <button onclick="openLightbox()">Open Lightbox</button> -->
+    <div id="lightbox" style="display: none;">
+        <div id="lightbox-content">
+            <div id="close-button" onclick="closeLightbox()">
+            <span class="close-icon">X</span>
+            </div>
+            <iframe src="https://link.marketingmadness.app/widget/form/ggKmCHxLaW7j2KtZEQL1" style="display: block; width: 100%; height: 100%; border: none; border-radius: 4px" id="popup-ggKmCHxLaW7j2KtZEQL1" data-layout="{'id':'POPUP'}" data-trigger-type="alwaysShow" data-trigger-value="" data-activation-type="alwaysActivated" data-activation-value="" data-deactivation-type="neverDeactivate" data-deactivation-value="" data-form-name="Subscribe" data-height="432" data-layout-iframe-id="popup-ggKmCHxLaW7j2KtZEQL1" data-form-id="ggKmCHxLaW7j2KtZEQL1" title="Subscribe"></iframe>
+        </div>
+        </div>
+
+        <style>
+        #lightbox {
+        display: none;
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+        z-index: 9999;
+        }
+
+        #lightbox-content {
+        display: flex;
+        flex-direction: column;
+        align-items: flex-end;
+        justify-content: flex-start;
+        width: 100%;
+        height: 100%;
+        padding: 20px;
+        box-sizing: border-box;
+        }
+
+        #close-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        top: 8%;
+        right: 35%;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: white;
+        cursor: pointer;
+        }
+
+        .close-icon {
+        font-size: 20px;
+        font-weight: bold;
+        color: black;
+        }
+
+        iframe {
+        display: block;
+        width: 100%;
+        height: 100%;
+        border: none;
+        border-radius: 4px;
+        }
+        </style>
+
+        <script>
+        function openLightbox() {
+            //redirect to onboarding steps
+            //window.location.replace("/onboarding/01");
+            //return;
+            var lightbox = document.getElementById('lightbox');
+            lightbox.style.display = 'block';
+        }
+
+        function closeLightbox() {
+        var lightbox = document.getElementById('lightbox');
+        lightbox.style.display = 'none';
+        }
+        </script>
 
     <!-- Page wrapper -->
     <div class="flex flex-col min-h-screen overflow-hidden">
@@ -1007,13 +1083,13 @@
                                         {
                                             img: './images/testimonial-02.jpg',
                                             quote: "I have been using this product for a few weeks now and I am blown away by the results. My balance grows each week and I have no issued with accessing my liquidity.",
-                                            name: 'Mark Luk',
+                                            name: 'Mark L',
                                             role: 'Spark Founder & CEO'
                                         },
                                         {
                                             img: './images/testimonial-03.jpg',
                                             quote: "As a busy professional, I don't have a lot of time to devote to passive wealth growth. But with this program, I have seen amazing results in just a few short weeks.",
-                                            name: 'Jeff Kahl',
+                                            name: 'Jeff K',
                                             role: 'Appy Product Lead'
                                         },
                                     ],
@@ -1071,7 +1147,7 @@
                             <h2 class="h2 bg-clip-text text-transparent bg-gradient-to-r from-slate-200/60 via-slate-200 to-slate-200/60 pb-4">Subscribe To Us Today</h2>
                             <p class="text-lg text-slate-400 mb-8">We respect your privacy and time, we will not spam you or sell your data to 3rd parties.</p>
                             <div>
-                                <a class="btn text-slate-900 bg-gradient-to-r from-white/80 via-white to-white/80 hover:bg-white transition duration-150 ease-in-out group" href="#0">
+                                <a class="btn text-slate-900 bg-gradient-to-r from-white/80 via-white to-white/80 hover:bg-white transition duration-150 ease-in-out group" onclick="openLightbox()" href="#0">
                                     Subscribe <span class="tracking-normal text-purple-500 group-hover:translate-x-0.5 transition-transform duration-150 ease-in-out ml-1">-&gt;</span>
                                 </a>
                             </div>
@@ -1095,8 +1171,8 @@
                             <div class="mb-4 sm:mb-0">
                                 <div class="mb-4">
                                     <!-- Logo -->
-                                    <a class="block" href="index.html" aria-label="Cruip">
-                                        <img src="./images/logo.png" width="180" height="66" alt="Stellar">
+                                    <a class="block" href="/" aria-label="PPC">
+                                        <img src="./images/logo.png" width="180" height="66" alt="PPC">
                                     </a>
                                 </div>
                                 <div class="text-sm text-slate-300">© PlatinumPlusCapital.com <span class="text-slate-500">-</span> All rights reserved.</div>
@@ -1122,7 +1198,7 @@
                                 <a class="text-slate-400 hover:text-slate-200 transition duration-150 ease-in-out" href="/">Home</a>
                             </li>
                             <li>
-                                <a class="text-slate-400 hover:text-slate-200 transition duration-150 ease-in-out" href="#0">Pricing & Plans</a>
+                                <a class="text-slate-400 hover:text-slate-200 transition duration-150 ease-in-out" href="#pricing">Pricing & Plans</a>
                             </li>
                         </ul>
                     </div>
@@ -1132,7 +1208,7 @@
                         <h6 class="text-sm text-slate-50 font-medium mb-2">Company</h6>
                         <ul class="text-sm space-y-2">
                             <li>
-                                <a class="text-slate-400 hover:text-slate-200 transition duration-150 ease-in-out" href="/p/contact">Contact Us</a>
+                                <a class="text-slate-400 hover:text-slate-200 transition duration-150 ease-in-out" href="mailto:info@platinumpluscapital.com">Contact Us</a>
                             </li>
                             <li>
                                 <a class="text-slate-400 hover:text-slate-200 transition duration-150 ease-in-out" href="/p/gdpr">GDPR Terms</a>
@@ -1147,9 +1223,9 @@
                             <li>
                                 <a class="text-slate-400 hover:text-slate-200 transition duration-150 ease-in-out" href="/login">Login</a>
                             </li>
-                            <li>
+                            <!--<li>
                                 <a class="text-slate-400 hover:text-slate-200 transition duration-150 ease-in-out" href="#0">FAQ</a>
-                            </li>
+                            </li>-->
                         </ul>
                     </div>
 

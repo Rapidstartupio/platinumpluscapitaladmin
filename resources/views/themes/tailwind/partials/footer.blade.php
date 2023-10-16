@@ -143,19 +143,19 @@
             <ul class="footer-links flex flex-wrap space-x-5 text-xs">
                 <li class="text mb-6 text-center flex-full lg:flex-none lg:mb-0">&copy; {{ date('Y') }} {{ setting('site.title', 'Laravel Wave') }}, Inc. All rights reserved.</li>
                 <li class="text lg:ml-6">
-                    <a href="#_" class="text relative inline-block text-black group">
+                    <a href="/p/privacy" class="text relative inline-block text-black group">
                         <span class="absolute bottom-0 w-full transition duration-150 ease-out transform -translate-y-1 border-b border-black opacity-0 group-hover:opacity-100 group-hover:translate-y-0"></span>
                         <span>Privacy Policy</span>
                     </a>
                 </li>
                 <li class="text ml-auto mr-auto text-center lg:ml-6 lg:mr-0">
-                    <a href="#_" class="text relative inline-block text-black group">
+                    <a href="/p/gdpr" class="text relative inline-block text-black group">
                         <span class="absolute bottom-0 w-full transition duration-150 ease-out transform -translate-y-1 border-b border-black opacity-0 group-hover:opacity-100 group-hover:translate-y-0"></span>
-                        <span>Disclaimers</span>
+                        <span>GDPR</span>
                     </a>
                 </li>
                 <li class="text lg:ml-6" style="margin-right: 20px">
-                    <a href="#_" class="text relative inline-block text-black group">
+                    <a href="/p/terms" class="text relative inline-block text-black group">
                         <span class="absolute bottom-0 w-full transition duration-150 ease-out transform -translate-y-1 border-b border-black opacity-0 group-hover:opacity-100 group-hover:translate-y-0"></span>
                         <span>Terms and Conditions</span>
                     </a>
