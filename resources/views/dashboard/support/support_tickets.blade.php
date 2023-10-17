@@ -101,7 +101,7 @@
             <div class="uk-card-body h-24 min-h-0 md:min-h-full">
                 <div class="heading">
                  
-                    @if(is_null($tickets))
+                    @if($tickets == null)
                     <p class="text flex text-lg font-small leading-6 text-gray-600 mt-5" style="margin-left: 30px">Welcome to our&nbsp;<strong>Support.</strong>&nbsp;Here you can check your active support ticket or you can create a new one!</p>
 
                     <div class="support-group">
@@ -117,6 +117,7 @@
                         <caption class="caption p-5 text-lg font-semibold text-left text-gray-900 bg-white dark:text-white dark:bg-gray-800">
                             Support Tickets
                             <p class="mt-1 text-sm font-normal text-gray-500 dark:text-gray-400">Browse a list of your created tickets, stay organized, get answers, keep in touch, grow your business, and more.</p>
+                            <a href="{{ route('dashboard.create_ticket') }}" class="create-ticket-btn flex self-end justify-center w-auto px-4 py-2 mt-5 text-sm font-medium text-white transition duration-150 ease-in-out border border-transparent rounded-md">Create Your Ticket</a>
                         </caption>
                         <thead class="table-head text-xs text-gray-700 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400">
                         <tr>

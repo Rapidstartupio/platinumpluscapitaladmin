@@ -18,12 +18,11 @@ class SupportController extends Controller
         {
             return redirect()->route('login');
         }
-        $userId = Auth::id();
-
+    
         $tickets = SupportTicket::where('email', '=', Auth::user()->email)->get();
 
-  
-        // if(!is_null($tickets))
+        // dd($tickets == null);
+        // if($tickets == null)
         // {
         //     dd('working');
         // }
