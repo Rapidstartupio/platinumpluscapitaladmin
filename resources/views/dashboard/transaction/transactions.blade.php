@@ -117,7 +117,7 @@
                         <tbody>
 
                         @foreach($transactions as $transaction)
-                            <tr class="table-row bg-white border-b">
+                        <tr class="table-row bg-white border-b">
                             <th scope="row" class="px-6 py-4">
                                 #{{$transaction->transaction_id}}
                             </th>

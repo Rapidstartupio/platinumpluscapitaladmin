@@ -18,7 +18,21 @@ class SupportController extends Controller
         {
             return redirect()->route('login');
         }
-        return view('dashboard.support.support_tickets');
+        $userId = Auth::id();
+
+        $tickets = SupportTicket::where('email', '=', Auth::user()->email)->get();
+
+  
+        // if(!is_null($tickets))
+        // {
+        //     dd('working');
+        // }
+        // else
+        // {
+        //     dd('not working');
+        // }
+
+        return view('dashboard.support.support_tickets', compact('tickets'));
     }
 
     public function create_ticket() {
