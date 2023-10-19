@@ -678,7 +678,7 @@ svg.results__dial {
         <tspan class="results__dial-perc" text-anchor="start">0</tspan>
         <tspan baseline-shift="super">%</tspan>
     </text> -->
-    <text class="results__dial-effect results__text text-center" x="175" y="350" font-size="28" fill="#64d3de">FOREX</text>
+    <text class="results__dial-effect results__text text-center" x="215" y="350" font-size="28" fill="#64d3de">FOREX</text>
     <text class="results__dial-results results__text" text-anchor="middle" x="250" y="285" fill="#64d3de">
         <tspan baseline-shift="super">$</tspan>
         <tspan fill="#fff" class="results__dial-saving">{{ $user_forex_balance ? $user_forex_balance : 0 }}</tspan>
