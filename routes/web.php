@@ -170,7 +170,8 @@ Route::get('cron', function(){
 
   if($rate) {
       foreach($users as $user) {
-          $balance = $user->balance()->first();
+        // latest balance ( date)
+          $balance = $user->balance()->orderBy('date', 'desc')->first();
           if($balance) {
               // Get all records for the user for the current month
               $interestLogs = InterestLog::whereUserId($user->id)->whereMonth('created_at', 10)->get();
