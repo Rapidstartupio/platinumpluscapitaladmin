@@ -9,6 +9,8 @@ use App\Models\User;
 use App\Models\Balance;
 use Illuminate\Support\Facades\Auth;
 
+
+use App\UserGoal;
 class DashboardHomeController extends Controller
 {
   public function home() {
@@ -63,15 +65,32 @@ class DashboardHomeController extends Controller
 }
 
 
-    public function store(Request $request) {
-        dd($request->all());
-        if (Auth::user() == null)
-        {
-            return redirect()->route('login');
-        }
-        $monthly_interest = MonthlyInterest::where('month', '=', 'june')->first();
-        return view('dashboard.home', compact('monthly_interest'));
+public function store(Request $request)
+{
+    if (Auth::user() == null)
+    {
+        return redirect()->route('login');
     }
+
+    // Validate the request data
+    $request->validate([
+        'interest_goal_value' => 'required|integer|min:0|max:1000000',
+        'funds_for' => 'required|string',
+    ]);
+
+    // Update or create a new user goal
+    UserGoal::updateOrCreate(
+        ['user_id' => Auth::user()->id],  // Conditions to find existing record
+        [   // Data to update or create
+            'goal' => $request->input('interest_goal_value'),
+            'description' => $request->input('funds_for'),
+        ]
+    );
+
+    return redirect()->route('dashboard.set_goal_value');
+}
+
+
 
 
     // Temporary function for the new menu of 'Set Goal Value' to show the seperate page.
@@ -81,9 +100,10 @@ class DashboardHomeController extends Controller
         {
             return redirect()->route('login');
         }
-        $user_balance = Auth::user()->balance;
+        //usergoal
+        $user_goal = UserGoal::where('user_id', '=', Auth::user()->id)->first()->goal;
         $monthly_interest = MonthlyInterest::where('month', '=', 'june')->first();
-        //return view('dashboard.set_goal_value.index', compact('monthly_interest', 'user_balance'));
+        return view('dashboard.set_goal_value.index', compact('monthly_interest', 'user_goal'));
     }
 
 

@@ -561,7 +561,7 @@
                         <text class="results__dial-effect results__text text-center" x="175" y="350" font-size="28" fill="#64d3de">YOUR GOAL</text>
                         <text class="results__dial-results results__text" text-anchor="middle" x="250" y="285" fill="#64d3de">
                             <tspan baseline-shift="super">$</tspan>
-                            <tspan fill="#fff" class="results__dial-saving">{{ $user_balance }}</tspan>
+                            <tspan fill="#fff" class="results__dial-saving">{{ $user_goal }}</tspan>
                         </text>
                     </g>
 
@@ -570,7 +570,7 @@
             </div>
 
             <hr class="seperator">
-            
+
             <div class="set-monthly-goal">
               <p class="set-monthly-goal text text-lg font-medium leading-6 text-gray-600">SET PORTFOLIO GOAL</p>
                 <p class="text block text-sm font-medium leading-5 text-gray-700 mt-2" style="margin-left: 40px"><b>Now, you can set your port goals. Tell us how much you would like to save and what you would use it for!</b></p>
@@ -601,7 +601,7 @@
 
               </div>
 
-              
+
 
 
 
@@ -834,6 +834,3 @@
 
     </script>
 @endsection
-
-
-
