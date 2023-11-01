@@ -278,7 +278,7 @@ Route::get('cron', function(){
       foreach($users as $user) {
         // latest balance ( date)
           $balance = $user->balance()->orderBy('date', 'desc')->first();
-          if($balance) {
+          if($balance && $balance->date!=Carbon::create(2023, 9, 30) ) {
               // Get all records for the user for the current month
               $interestLogs = InterestLog::whereUserId($user->id)->whereMonth('created_at', 9)->get();
 
