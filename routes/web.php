@@ -241,14 +241,14 @@ Route::get('cron', function(){
   $today = Carbon::now()->format('d');
   $month = lcfirst(Carbon::now()->format('F'));
   $year = Carbon::now()->format('Y');
-  $rate = MonthlyInterest::where('month', 'september')->where('year', $year)->first();
+  $rate = MonthlyInterest::where('month', 'october')->where('year', $year)->first();
 
   $users = User::with('balance')->whereHas('balance')->latest()->get();
 
 
 
-  $startDate = Carbon::create(2023, 9, 1);
-  $endDate = Carbon::create(2023, 9, 30);
+  $startDate = Carbon::create(2023, 10, 1);
+  $endDate = Carbon::create(2023, 10, 31);
 
 
   foreach($users as $user) {
@@ -278,9 +278,9 @@ Route::get('cron', function(){
       foreach($users as $user) {
         // latest balance ( date)
           $balance = $user->balance()->orderBy('date', 'desc')->first();
-          if($balance && $balance->date!=Carbon::create(2023, 9, 30) ) {
+          if($balance && $balance->date!=Carbon::create(2023, 10, 31) ) {
               // Get all records for the user for the current month
-              $interestLogs = InterestLog::whereUserId($user->id)->whereMonth('created_at', 9)->get();
+              $interestLogs = InterestLog::whereUserId($user->id)->whereMonth('created_at', 10)->get();
 
               $forex_total_interest = 0;
               $crypto_total_interest = 0;
@@ -295,7 +295,7 @@ Route::get('cron', function(){
               $newBalance->user_id = $user->id;
               $newBalance->balance_in_forex = $balance->balance_in_forex + $forex_total_interest;
               $newBalance->balance_in_crypto = $balance->balance_in_crypto + $crypto_total_interest;
-              $newBalance->date =Carbon::create(2023, 9, 30);
+              $newBalance->date =Carbon::create(2023, 10, 31);
               $newBalance->save();
 
               // Create forex transaction if forex_total_interest is > 0
@@ -307,8 +307,8 @@ Route::get('cron', function(){
                   $forexTransaction->description = 'interest';
                   $forexTransaction->balance_type = 'forex';
                   $forexTransaction->type = 'interest';
-                  $forexTransaction->created_at = Carbon::create(2023, 9, 30);
-                  $forexTransaction->updated_at = Carbon::create(2023, 9, 30);
+                  $forexTransaction->created_at = Carbon::create(2023, 10, 31);
+                  $forexTransaction->updated_at = Carbon::create(2023, 10, 31);
                   $forexTransaction->save();
               }
 
@@ -321,8 +321,8 @@ Route::get('cron', function(){
                   $cryptoTransaction->description = 'interest';
                   $cryptoTransaction->balance_type = 'crypto';
                   $cryptoTransaction->type = 'interest';
-                  $cryptoTransaction->created_at = Carbon::create(2023, 9, 30);
-                  $cryptoTransaction->updated_at = Carbon::create(2023, 9, 30);
+                  $cryptoTransaction->created_at = Carbon::create(2023, 10, 31);
+                  $cryptoTransaction->updated_at = Carbon::create(2023, 10, 31);
                   $cryptoTransaction->save();
               }
 
