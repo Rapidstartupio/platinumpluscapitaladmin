@@ -295,7 +295,7 @@ Route::get('cron', function(){
               $newBalance->user_id = $user->id;
               $newBalance->balance_in_forex = $balance->balance_in_forex + $forex_total_interest;
               $newBalance->balance_in_crypto = $balance->balance_in_crypto + $crypto_total_interest;
-              $newBalance->date = now();
+              $newBalance->date =Carbon::create(2023, 9, 30);
               $newBalance->save();
 
               // Create forex transaction if forex_total_interest is > 0
@@ -307,8 +307,8 @@ Route::get('cron', function(){
                   $forexTransaction->description = 'interest';
                   $forexTransaction->balance_type = 'forex';
                   $forexTransaction->type = 'interest';
-                  $forexTransaction->created_at = Carbon::now()->endOfMonth();
-                  $forexTransaction->updated_at = Carbon::now()->endOfMonth();
+                  $forexTransaction->created_at = Carbon::create(2023, 9, 30);
+                  $forexTransaction->updated_at = Carbon::create(2023, 9, 30);
                   $forexTransaction->save();
               }
 
@@ -321,8 +321,8 @@ Route::get('cron', function(){
                   $cryptoTransaction->description = 'interest';
                   $cryptoTransaction->balance_type = 'crypto';
                   $cryptoTransaction->type = 'interest';
-                  $cryptoTransaction->created_at = Carbon::now()->endOfMonth();
-                  $cryptoTransaction->updated_at = Carbon::now()->endOfMonth();
+                  $cryptoTransaction->created_at = Carbon::create(2023, 9, 30);
+                  $cryptoTransaction->updated_at = Carbon::create(2023, 9, 30);
                   $cryptoTransaction->save();
               }
 
