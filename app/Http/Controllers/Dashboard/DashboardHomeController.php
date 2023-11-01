@@ -101,7 +101,17 @@ public function store(Request $request)
             return redirect()->route('login');
         }
         //usergoal
-        $user_goal = UserGoal::where('user_id', '=', Auth::user()->id)->first()->goal;
+        $my_user_goal = UserGoal::where('user_id', '=', Auth::user()->id)->first();
+        //check if null , if yes create one
+        if($my_user_goal == null){
+            $my_user_goal = new UserGoal();
+            $my_user_goal->user_id = Auth::user()->id;
+            $my_user_goal->goal = 0;
+            $my_user_goal->description = "";
+            $my_user_goal->save();
+        }
+        $user_goal = $my_user_goal->goal;
+
         $monthly_interest = MonthlyInterest::where('month', '=', 'june')->first();
         return view('dashboard.set_goal_value.index', compact('monthly_interest', 'user_goal'));
     }
