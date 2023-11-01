@@ -241,14 +241,12 @@ Route::get('cron', function(){
   $today = Carbon::now()->format('d');
   $month = lcfirst(Carbon::now()->format('F'));
   $year = Carbon::now()->format('Y');
-  $rate = MonthlyInterest::where('month', 'october')->where('year', $year)->first();
+  $rate = MonthlyInterest::where('month', $month)->where('year', $year)->first();
 
   $users = User::with('balance')->whereHas('balance')->latest()->get();
 
 
 
-  $startDate = Carbon::create(2023, 10, 1);
-  $endDate = Carbon::create(2023, 10, 31);
 
 
   foreach($users as $user) {
@@ -257,30 +255,35 @@ Route::get('cron', function(){
          // update this to check day and month and year ..
 
 
+         $check = InterestLog::whereUserId($user->id)->whereDay('created_at', now()->day)->whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->first();
 
 
-          for ($date = $startDate->copy(); $date->lte($endDate); $date->addDay()) {
 
-            $interest = new InterestLog;
-            $interest->user_id = $user->id;
-            $interest->forex_amount = $balance->balance_in_forex;
-            $interest->crypto_amount = $balance->balance_in_crypto;
-            $interest->created_at = $date; // Set the created_at date to the looping date
-            $interest->save();
+         Log::info($check);
+         Log::info(  now()->day);
 
-        }
+
+         if(!$check) {
+             $interest = new InterestLog;
+             $interest->user_id = $user->id;
+             $interest->forex_amount = $balance->balance_in_forex;
+             $interest->crypto_amount = $balance->balance_in_crypto;
+             $interest->save();
+         }
+
+
 
       }
   }
 
 
-  if($rate && $rate->done=="no") {
+  if($today == $last_day && $rate && $rate->done=="no" ) {
       foreach($users as $user) {
         // latest balance ( date)
           $balance = $user->balance()->orderBy('date', 'desc')->first();
           if($balance) {
               // Get all records for the user for the current month
-              $interestLogs = InterestLog::whereUserId($user->id)->whereMonth('created_at', 9)->get();
+              $interestLogs = InterestLog::whereUserId($user->id)->whereMonth('created_at', now()->month)->get();
 
               $forex_total_interest = 0;
               $crypto_total_interest = 0;
@@ -295,7 +298,7 @@ Route::get('cron', function(){
               $newBalance->user_id = $user->id;
               $newBalance->balance_in_forex = $balance->balance_in_forex + $forex_total_interest;
               $newBalance->balance_in_crypto = $balance->balance_in_crypto + $crypto_total_interest;
-              $newBalance->date =Carbon::create(2023, 10, 31);
+              $newBalance->date =now();
               $newBalance->save();
 
               // Create forex transaction if forex_total_interest is > 0
@@ -307,8 +310,8 @@ Route::get('cron', function(){
                   $forexTransaction->description = 'interest';
                   $forexTransaction->balance_type = 'forex';
                   $forexTransaction->type = 'interest';
-                  $forexTransaction->created_at = Carbon::create(2023, 10, 31);
-                  $forexTransaction->updated_at = Carbon::create(2023, 10, 31);
+                  $forexTransaction->created_at = now();
+                  $forexTransaction->updated_at = now();
                   $forexTransaction->save();
               }
 
@@ -321,8 +324,8 @@ Route::get('cron', function(){
                   $cryptoTransaction->description = 'interest';
                   $cryptoTransaction->balance_type = 'crypto';
                   $cryptoTransaction->type = 'interest';
-                  $cryptoTransaction->created_at =Carbon::create(2023, 10, 31);
-                  $cryptoTransaction->updated_at = Carbon::create(2023, 10, 31);
+                  $cryptoTransaction->created_at =now();
+                  $cryptoTransaction->updated_at = now();
                   $cryptoTransaction->save();
               }
 
