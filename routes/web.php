@@ -32,7 +32,7 @@ use App\Models\Transaction;
 use App\Models\Balance;
 
 if (!function_exists('getRandomNumber')) {
-  function getgetRandomNumber() {
+  function getRandomNumber() {
       return mt_rand(1000000000, 99999999999);
   }
 }
