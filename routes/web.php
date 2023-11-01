@@ -233,7 +233,6 @@ Route::get('cron', function(){
 
   return "200 ok";
 });
-
 */
 
 Route::get('cron', function(){
