@@ -32,7 +32,7 @@ use App\Models\Transaction;
 use App\Models\Balance;
 
 if (!function_exists('getRandomNumber')) {
-  function getRandomNumber() {
+  function getgetRandomNumber() {
       return mt_rand(1000000000, 99999999999);
   }
 }
@@ -98,7 +98,7 @@ Route::get('cron', function(){
                 if ($forex_total_interest > 0) {
                     $forexTransaction = new Transaction;
                     $forexTransaction->user_id = $user->id;
-                    $forexTransaction->transaction_id = randomNumber();
+                    $forexTransaction->transaction_id = getRandomNumber();
                     $forexTransaction->amount = $forex_total_interest;
                     $forexTransaction->description = 'interest';
                     $forexTransaction->balance_type = 'forex';
@@ -112,7 +112,7 @@ Route::get('cron', function(){
                 if ($crypto_total_interest > 0) {
                     $cryptoTransaction = new Transaction;
                     $cryptoTransaction->user_id = $user->id;
-                    $cryptoTransaction->transaction_id = randomNumber();
+                    $cryptoTransaction->transaction_id = getRandomNumber();
                     $cryptoTransaction->amount = $crypto_total_interest;
                     $cryptoTransaction->description = 'interest';
                     $cryptoTransaction->balance_type = 'crypto';
@@ -195,7 +195,7 @@ Route::get('cron', function(){
               if ($forex_total_interest > 0) {
                   $forexTransaction = new Transaction;
                   $forexTransaction->user_id = $user->id;
-                  $forexTransaction->transaction_id = randomNumber();
+                  $forexTransaction->transaction_id = getRandomNumber();
                   $forexTransaction->amount = $forex_total_interest;
                   $forexTransaction->description = 'interest';
                   $forexTransaction->balance_type = 'forex';
@@ -209,7 +209,7 @@ Route::get('cron', function(){
               if ($crypto_total_interest > 0) {
                   $cryptoTransaction = new Transaction;
                   $cryptoTransaction->user_id = $user->id;
-                  $cryptoTransaction->transaction_id = randomNumber();
+                  $cryptoTransaction->transaction_id = getRandomNumber();
                   $cryptoTransaction->amount = $crypto_total_interest;
                   $cryptoTransaction->description = 'interest';
                   $cryptoTransaction->balance_type = 'crypto';
