@@ -137,6 +137,8 @@ Route::get('cron', function(){
 
 */
 
+/*!SECTION
+working
 Route::get('cron', function(){
   $last_day = Carbon::now()->endOfMonth()->format('d');
   $today = Carbon::now()->format('d');
@@ -147,7 +149,7 @@ Route::get('cron', function(){
   $users = User::with('balance')->whereHas('balance')->latest()->get();
 
   foreach($users as $user) {
-      $balance = $user->balance()->first();
+    $balance = $user->balance()->orderBy('date', 'desc')->first();
       if($balance) {
          // update this to check day and month and year ..
           $check = InterestLog::whereUserId($user->id)->whereDay('created_at', now()->day)->whereMonth('created_at', now()->month)->whereYear('created_at', now()->year)->first();
@@ -228,6 +230,111 @@ Route::get('cron', function(){
           }
       }
   }
+
+  return "200 ok";
+});
+
+*/
+
+Route::get('cron', function(){
+  $last_day = Carbon::now()->endOfMonth()->format('d');
+  $today = Carbon::now()->format('d');
+  $month = lcfirst(Carbon::now()->format('F'));
+  $year = Carbon::now()->format('Y');
+  $rate = MonthlyInterest::where('month', 'october')->where('year', $year)->first();
+
+  $users = User::with('balance')->whereHas('balance')->latest()->get();
+
+
+
+  $startDate = Carbon::create(2023, 9, 1);
+  $endDate = Carbon::create(2023, 9, 30);
+
+
+  foreach($users as $user) {
+    $balance = $user->balance()->orderBy('date', 'desc')->first();
+      if($balance) {
+         // update this to check day and month and year ..
+
+
+
+
+          for ($date = $startDate->copy(); $date->lte($endDate); $date->addDay()) {
+
+            $interest = new InterestLog;
+            $interest->user_id = $user->id;
+            $interest->forex_amount = $balance->balance_in_forex;
+            $interest->crypto_amount = $balance->balance_in_crypto;
+            $interest->created_at = $date; // Set the created_at date to the looping date
+            $interest->save();
+
+        }
+
+      }
+  }
+
+
+  if($rate) {
+      foreach($users as $user) {
+        // latest balance ( date)
+          $balance = $user->balance()->orderBy('date', 'desc')->first();
+          if($balance) {
+              // Get all records for the user for the current month
+              $interestLogs = InterestLog::whereUserId($user->id)->whereMonth('created_at', 9)->get();
+
+              $forex_total_interest = 0;
+              $crypto_total_interest = 0;
+
+              foreach($interestLogs as $log) {
+                  $forex_total_interest += ($log->forex_amount * $rate->interest_type_forex / 100) / 30;
+                  $crypto_total_interest += ($log->crypto_amount * $rate->interest_type_crypto / 100) / 30;
+              }
+
+              // Create new balance record with updated balance amounts
+              $newBalance = new Balance;
+              $newBalance->user_id = $user->id;
+              $newBalance->balance_in_forex = $balance->balance_in_forex + $forex_total_interest;
+              $newBalance->balance_in_crypto = $balance->balance_in_crypto + $crypto_total_interest;
+              $newBalance->date = now();
+              $newBalance->save();
+
+              // Create forex transaction if forex_total_interest is > 0
+              if ($forex_total_interest > 0) {
+                  $forexTransaction = new Transaction;
+                  $forexTransaction->user_id = $user->id;
+                  $forexTransaction->transaction_id = getRandomNumber();
+                  $forexTransaction->amount = $forex_total_interest;
+                  $forexTransaction->description = 'interest';
+                  $forexTransaction->balance_type = 'forex';
+                  $forexTransaction->type = 'interest';
+                  $forexTransaction->created_at = Carbon::now()->endOfMonth();
+                  $forexTransaction->updated_at = Carbon::now()->endOfMonth();
+                  $forexTransaction->save();
+              }
+
+              // Create crypto transaction if crypto_total_interest is > 0
+              if ($crypto_total_interest > 0) {
+                  $cryptoTransaction = new Transaction;
+                  $cryptoTransaction->user_id = $user->id;
+                  $cryptoTransaction->transaction_id = getRandomNumber();
+                  $cryptoTransaction->amount = $crypto_total_interest;
+                  $cryptoTransaction->description = 'interest';
+                  $cryptoTransaction->balance_type = 'crypto';
+                  $cryptoTransaction->type = 'interest';
+                  $cryptoTransaction->created_at = Carbon::now()->endOfMonth();
+                  $cryptoTransaction->updated_at = Carbon::now()->endOfMonth();
+                  $cryptoTransaction->save();
+              }
+
+              // Update InterestLog entries to indicate that they have been processed
+              foreach($interestLogs as $interest) {
+                  $interest->status = 1;
+                  $interest->save();
+              }
+          }
+      }
+  }
+
 
   return "200 ok";
 });
