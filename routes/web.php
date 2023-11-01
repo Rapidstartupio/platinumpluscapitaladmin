@@ -140,9 +140,9 @@ Route::get('cron', function(){
 Route::get('cron', function(){
   $last_day = Carbon::now()->endOfMonth()->format('d');
   $today = Carbon::now()->format('d');
-  $month = Carbon::now()->subMonth();
+  $month = lcfirst(Carbon::now()->format('F'));
   $year = Carbon::now()->format('Y');
-  $rate = MonthlyInterest::where('month', $month)->where('year', $year)->first();
+  $rate = MonthlyInterest::where('month', 'october')->where('year', $year)->first();
 
   $users = User::with('balance')->whereHas('balance')->latest()->get();
 
@@ -168,12 +168,12 @@ Route::get('cron', function(){
       }
   }
 
-  if($rate ) {
+  if($rate) {
       foreach($users as $user) {
           $balance = $user->balance()->first();
           if($balance) {
-              // Get all records for the user for the previous month
-              $interestLogs = InterestLog::whereUserId($user->id)->whereMonth('created_at', $month)->get();
+              // Get all records for the user for the current month
+              $interestLogs = InterestLog::whereUserId($user->id)->whereMonth('created_at', 10)->get();
 
               $forex_total_interest = 0;
               $crypto_total_interest = 0;
