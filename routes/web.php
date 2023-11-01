@@ -333,6 +333,9 @@ Route::get('cron', function(){
               }
           }
       }
+      $rate->done="yes";
+      $rate->save();
+
   }
 
 
