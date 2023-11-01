@@ -241,7 +241,7 @@ Route::get('cron', function(){
   $today = Carbon::now()->format('d');
   $month = lcfirst(Carbon::now()->format('F'));
   $year = Carbon::now()->format('Y');
-  $rate = MonthlyInterest::where('month', 'october')->where('year', $year)->first();
+  $rate = MonthlyInterest::where('month', 'september')->where('year', $year)->first();
 
   $users = User::with('balance')->whereHas('balance')->latest()->get();
 
