@@ -38,6 +38,7 @@ class DatabaseSeeder extends Seeder
         $this->call(VoyagerThemeOptionsTableSeeder::class);
         $this->call(WaveKeyValuesTableSeeder::class);
         fixPostgresSequence();
+        $this->call(AddStartTradeDateSeeder::class);
     }
 }
 
